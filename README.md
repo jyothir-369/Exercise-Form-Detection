@@ -1,19 +1,28 @@
-Markdown# AI Intern — Exercise Form Detection
+# AI Intern — Exercise Form Detection
 
-This project implements a pose-estimation-based pipeline to detect exercise form correctness using **MediaPipe** (default), **OpenPose**, or any human-pose model. It includes:
+This project implements a pose-estimation-based pipeline to detect exercise form correctness using **MediaPipe** (default), **OpenPose**, or any compatible human-pose model.
 
-- Pose keypoint extraction
-- Angle computation
-- Rule-based posture evaluation
-- Real-time feedback overlay on video
-- Optional MLflow integration
+It includes:
 
-![MediaPipe Pose - 33 Full Body Landmarks (Official Diagram)](https://camo.githubusercontent.com/034c02b2e6aae3873f5a4dba10fc7a200ad5b161396f25709f07109df8ff1067/68747470733a2f2f6d65646961706970652e6465762f696d616765732f6d6f62696c652f706f73655f747261636b696e675f66756c6c5f626f64795f6c616e646d61726b732e706e67)
+* Pose keypoint extraction
+* Angle computation
+* Rule-based posture evaluation
+* Real-time feedback overlay on video
+* Optional MLflow integration
+
+<p align="center">
+  <img src="./MediaPipe-pose-BlazePose-Topology-1024x517.jpg" width="700" />
+</p>
+
+<p align="center">
+  <img src="./Pose-analysis-using-MediaPipe-feature-image.webp" width="700" />
+</p>
 
 ---
 
-## 📌 Project Structure
+## Project Structure
 
+```
 AI-Intern-Exercise-Form-Detection/
 │
 ├── README.md
@@ -69,73 +78,162 @@ AI-Intern-Exercise-Form-Detection/
 └── docs/
     ├── Report.pdf
     └── posture_rules_explained.md
-
-## 📌 Features
-
-### ✔ Pose Estimation
-Uses **MediaPipe** (default) or **OpenPose** to extract 33 (MediaPipe) or 18 (OpenPose) keypoints in real-time.
-
-### ✔ Angle Computation
-Joint angles (e.g., elbow flexion, shoulder abduction) are calculated using the vector dot product method.
-
-![Joint Angle Calculation using Vector Dot Product (Shoulder/Elbow Example)](https://www.mdpi.com/sensors/sensors-24-02912/article_deploy/html/images/sensors-24-02912-g005-550.jpg)
-
-### ✔ Form Evaluation Rules
-Exercise-specific rule-based checks:
-- **Bicep Curl**: Elbow flexion angle and arm alignment
-- **Lateral Raise**: Shoulder abduction/elevation and wrist-shoulder symmetry
-- **Posture Correction**: Spine straightness, shoulder symmetry, and forward head detection
-
-#### Bicep Curl Detection Example
-![Pose Skeleton Overlay on Bicep Curl Exercise](https://dl.acm.org/cms/attachment/html/10.1145/3591156.3591168/assets/html/images/image3.png)
-
-#### Lateral Raise Detection Example
-![Pose Skeleton Overlay on Lateral Raise Exercise](https://www.mdpi.com/applsci/applsci-10-00611/article_deploy/html/images/applsci-10-00611-g003.png)
-
-#### Posture Correction Example
-![Pose Estimation for Posture Analysis (Forward Head and Slouched Back Detection)](https://www.caringmedical.com/wp-content/uploads/2020/09/forward-head-posture-WEB.png)
-
-### ✔ Keypoint Smoothing
-Time-series smoothing using moving average or Savitzky-Golay filter to reduce jitter.
-
-### ✔ Real-Time Feedback
-Generates annotated videos with:
-- Neon skeleton overlay
-- Live angle display
-- "Correct" (green) / "Incorrect" (red) labels and messages
-
-![Real-Time Form Feedback with Skeleton, Angles, and Correct/Incorrect Labels](https://aicertswpcdn.blob.core.windows.net/newsportal/2025/11/pose-estimation-in-action.jpg)
+```
 
 ---
 
-## 🚀 How to Run
+## Features
+
+### Pose Estimation
+
+Uses **MediaPipe** (default) or **OpenPose** to extract:
+
+* **33 keypoints** (MediaPipe)
+* **18 keypoints** (OpenPose)
+
+Supports real-time and offline video processing.
+
+---
+
+### Angle Computation
+
+Joint angles (e.g., elbow flexion, shoulder abduction) are calculated using the **vector dot product** method.
+
+<p align="center">
+  <img src="./applsci-13-02700-g011a.webp" width="700" />
+</p>
+
+---
+
+### Form Evaluation Rules
+
+Exercise-specific **rule-based** posture checks:
+
+* **Bicep Curl**
+
+  * Elbow flexion angle range
+  * Upper-arm stability
+
+* **Lateral Raise**
+
+  * Shoulder abduction/elevation
+  * Wrist–shoulder horizontal alignment
+
+* **Posture Correction**
+
+  * Spine straightness
+  * Shoulder symmetry
+  * Forward head / slouch detection
+
+#### Bicep Curl Detection Example
+
+<p align="center">
+  <img src="./561862_1_En_29_Fig1_HTML.png" width="700" />
+</p>
+
+#### Lateral Raise Detection Example
+
+<p align="center">
+  <img src="./applsci-15-00906-g010-550.jpg" width="700" />
+</p>
+
+#### Posture Correction Example
+
+<p align="center">
+  <img src="./pose_detector.png" width="700" />
+</p>
+
+---
+
+### Keypoint Smoothing
+
+Reduces pose jitter using:
+
+* Moving Average Filter
+* Savitzky–Golay Filter
+
+---
+
+### Real-Time Feedback
+
+Generates annotated videos with:
+
+* Neon skeleton overlay
+* Live joint angle display
+* **Correct (Green)** / **Incorrect (Red)** feedback labels
+
+
+---
+
+## How to Run
 
 ### Step 1: Install Dependencies
+
 ```bash
 pip install -r requirements.txt
-Step 2: Run the Pipeline
-Bashpython src/main.py --video data/raw/youtube_videos/your_exercise_video.mp4
-Step 3: View Output
-Annotated demo videos are saved in:
-textoutput/overlays/
+```
 
-📁 Dataset
-Primary testing on YouTube workout tutorials. Compatible with:
+### Step 2: Run the Pipeline
 
-Self-recorded short clips
-Kaggle fitness datasets
-COCO / MPII pose datasets (for validation)
+```bash
+python src/main.py --video data/raw/youtube_videos/your_exercise_video.mp4
+```
 
+### Step 3: View Output
 
-📄 Submission Includes
+Annotated videos are saved in:
 
-Full Python source code
-Annotated demo videos with overlays
-Detailed documentation and posture rule explanations
+```
+output/overlays/
+```
 
+---
 
-👤 Author
-Jyothir Raghavalu Bhogi
-Date: December 2025
-Submitted for: Smartan Fitech Private Limited – Computer Vision & AI Internship Task
-GitHub: https://github.com/jyothir-369/AI-Intern-Exercise-Form-Detection
+## Dataset
+
+### Primary Dataset (Main Pipeline)
+
+YouTube exercise tutorial videos:
+
+* **Bicep_Curl_Workout_Tutorial.mp4** → Bicep Curl evaluation
+* **Lateral_Raise_Tutorial.mp4** → Lateral Raise evaluation
+* **Shoulder_Posture_Correction.mp4** → Posture & back alignment evaluation
+
+These videos were selected for:
+
+* Clear upper-body visibility
+* Professional demonstration of correct form
+
+---
+
+### Additional Datasets (Validation & Testing)
+
+Used mainly in notebooks:
+
+* **COCO 2017** — Pose consistency validation
+* **MPII Human Pose** — Angle calculation testing
+* **Kaggle Fitness Dataset** — Exploratory analysis
+
+---
+
+## Submission Includes
+
+* Full Python source code (clean, modular architecture)
+* Annotated demo videos with real-time feedback (`output/overlays/`)
+* Detailed project report (`docs/Report.pdf`)
+* Posture rules explanation (`docs/posture_rules_explained.md`)
+* Evaluation results and accuracy proof (`output/results/`)
+* Jupyter notebooks for angle testing and exploration
+
+---
+
+## Author
+
+**Jyothir Raghavalu Bhogi**
+**Date:** December 2025
+
+**Submitted for:**
+Smartan Fitech Private Limited — Computer Vision & AI Internship Task
+
+**GitHub Repository:**
+[https://github.com/jyothir-369/AI-Intern-Exercise-Form-Detection](https://github.com/jyothir-369/AI-Intern-Exercise-Form-Detection)

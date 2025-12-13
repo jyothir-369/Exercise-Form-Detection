@@ -1,42 +1,27 @@
-# Python cache
-#__pycache__/
-#*.pyc
-#*.pyo
-
-# Virtual environment
-#venv/
-#.env/
-
-# Jupyter notebook checkpoints
-#.ipynb_checkpoints/
-
-# System files
-#.DS_Store
-#Thumbs.db
-
-# Data
-#data/raw/*
-#data/processed/*
-#data/keypoints/*
-
-# Logs
-#output/logs/*
-#*.log
-
-# Videos & large outputs
-#output/overlays/*
-#output/results/*
-
-# MLflow artifacts
-# mlruns/
-
-
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .env
 venv/
 .env/
-.idea/
-.vscode/
-data/raw/
 
+# Jupyter
+.ipynb_checkpoints/
+
+# Data & outputs
+data/
+output/
+*.npy
+*.csv
+*.mp4
+*.avi
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
