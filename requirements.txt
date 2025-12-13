@@ -1,0 +1,12 @@
+opencv-python
+mediapipe
+numpy
+scipy
+pandas
+matplotlib
+tqdm
+mlflow
+scikit-learn
+protobuf==3.20.*
+moviepy
+pyopenpose
