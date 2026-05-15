@@ -1,5 +1,4 @@
-Exercise Form Detection
-
+# Exercise Form Detection
 This project implements a pose-estimation-based pipeline to detect exercise form correctness using **MediaPipe** (default), **OpenPose**, or any compatible human-pose model.
 
 It includes:
